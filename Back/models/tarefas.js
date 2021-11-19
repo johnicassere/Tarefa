@@ -3,11 +3,9 @@ const mongoose = require('mongoose');
 const tarefasSchema = new mongoose.Schema({
     titulo:{type:String, required: true},
     descricao:{type:String, required:true},
-    prioridade:{type:String, required: true},
-    status:{type:String, required: true},
+    prioridade:{type:Number, required: true, min:1, max:3},
+    statusTarefa:{type:String, required: true},
     prazo:{type:String, required: true},
-    dataCriacao:{type:Date,default:Date.now},
-
 })
 
 const TarefasModel = mongoose.model('tarefas', tarefasSchema);
