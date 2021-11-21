@@ -35,8 +35,8 @@ const Edit = () => {
     const request = await Api.fetchPut(tarefa, id);
     const data = await request.json();
     alert(data.message);
-    //navigate('/');
-    navigate(`/view/${id}`);
+    navigate('/');
+    //navigate(`/view/${id}`);
   };
 
   const voltar = async (evento) => {
