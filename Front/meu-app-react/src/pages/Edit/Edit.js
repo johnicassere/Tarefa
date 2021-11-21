@@ -1,14 +1,24 @@
 import React, {useState, useEffect} from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Api from "../../api/api";
 
+
 const Edit = () =>{
-    const { id } = useParams();
-    const [tarefa, setTarefa] = useState({});
+    const navigate = useNavigate();
+    const [tarefa, setTarefa] = useState({
+      titulo:'',
+      descricao:'',
+      prioridade:'',
+      statusTarefa:'',
+      prazo:''
+
+    });
 
     useEffect(() =>{
         getTarefaById();
-    }, [])
+    }, []);
+
+    const { id } = useParams();
 
     const getTarefaById = async() =>{
         const request = await Api.fetchGetById(id);
@@ -16,23 +26,39 @@ const Edit = () =>{
         setTarefa(tarefa);
     };
     const handleFieldsChange = (evento) =>{
-        const campos = { ... tarefa}
-        campos[evento.target.titulo] = evento.target.value;
-        setTarefa(campos);
+        const tarefaEdit = { ...tarefa }
+        tarefaEdit[evento.target.name] = evento.target.value; 
+        console.log(tarefaEdit);
+        setTarefa(tarefaEdit);
+
     }
 
+    const handleSubmit = async (evento) =>{
+      evento.preventDefault();
+      const request = await Api.fetchPut(tarefa, id)
+      const data = await request.json();
+      alert(data.message);
+      //navigate('/');
+     navigate(`/view/${id}`);
+    }
+
+    const voltar = async (evento)=>{
+      evento.preventDefault();
+      navigate(`/view/${id}`);
+    }
+    
     return(
         <div className="container">
       <div className="card mt-4">
         <div className="card-title">
           <div className="row">
             <div className="col">
-              <h3 className="mx-3 my-3">Editar Tarefa</h3>
+              <h3 className="mx-3 my-3 text-center">Editar Tarefa</h3>
             </div>
           </div>
         </div>
         <div className="card-body">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="row mb-4">
               <div className="col-4">
                 <div className="form-group">
@@ -55,25 +81,28 @@ const Edit = () =>{
                     id="descricao"
                     type="text"
                     className="form-control"
-                    placeholder="Nome do autor"
+                    placeholder="Descrição"
                     value={tarefa.descricao}
                     onChange={handleFieldsChange}
                     name="descricao"
                   />
                 </div>
               </div>
+              
               <div className="col-4">
-                <div className="form-group">
-                  <label htmlFor="prioridade">Prioridade:</label>
-                  <input
-                    id="prioridade"
-                    type="text"
-                    className="form-control"
-                    value={tarefa.prioridade}
-                    onChange={handleFieldsChange}
-                    placeholder="Prioridadde da Tarefa"
-                    name="prioridade"
-                  />
+              <div className="form-group">
+                <label htmlFor="prioridade">Prioridade:</label>
+                <select value={tarefa.prioridade}
+                  onChange={handleFieldsChange}
+                  name="prioridade"
+                  id="prioridade"
+                  className="form-control"
+                >
+                  
+                  <option value="Min">Min</option>
+                  <option value="Medio">Medio</option>
+                  <option value="Max">Max</option>
+                </select>
                 </div>
               </div>
             </div>
@@ -87,7 +116,7 @@ const Edit = () =>{
                     value={tarefa.statusTarefa}
                     onChange={handleFieldsChange}
                     className="form-control"
-                    placeholder="URL da capa do album"
+                    placeholder="Status Tarefa"
                     name="statusTarefa"
                   />
                 </div>
@@ -110,9 +139,11 @@ const Edit = () =>{
                 <button type="submit" className="btn btn-success">
                   Editar
                 </button>
+                <form onClick={voltar}>
                 <button type="button" className="btn btn-danger">
-                  Cancelar
+                  Voltar
                 </button>
+                </form>
               </div>
             </div>
           </form>
