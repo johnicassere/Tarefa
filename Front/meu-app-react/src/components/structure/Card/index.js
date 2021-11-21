@@ -21,7 +21,7 @@ const Card = (props) => {
           <h5>
             Prioridade:<span className="d-flex">{tarefa.prioridade}</span>
           </h5>
-          <p className="card-text">Clique no Card para ver Descrição</p>
+          <p className="card-text">Clique no Card para ver a Descrição</p>
         </div>
       </div>
     </Link>

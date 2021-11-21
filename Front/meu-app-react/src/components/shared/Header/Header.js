@@ -18,11 +18,6 @@ const Header = () => {
               Cadastro
             </Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="#">
-              Quem somos
-            </Link>
-          </li>
         </ul>
       </nav>
     </div>

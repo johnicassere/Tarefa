@@ -80,9 +80,9 @@ const Cadastro = () => {
                 id="prioridade"
                 className="form-control"
               >
-                <option value="Min">Min</option>
-                <option value="Medio">Medio</option>
-                <option value="Max">Max</option>
+                <option value="Min">Baixa</option>
+                <option value="Medio">Média</option>
+                <option value="Max">Alta</option>
               </select>
             </div>
           </div>
@@ -90,13 +90,15 @@ const Cadastro = () => {
             <div className="col-4">
               <div className="form-group">
                 <label htmlFor="statusTarefa">Status da Tarefa:</label>
-                <input
-                  id="statusTarefa"
-                  type="text"
-                  className="form-control"
-                  placeholder="Status da Tarefa"
+                <select
                   name="statusTarefa"
-                />
+                  id="statusTarefa"
+                  className="form-control"
+                >
+                  <option value="Min">Fazer</option>
+                  <option value="Medio">Fazendo</option>
+                  <option value="Max">Feito</option>
+                </select>
               </div>
             </div>
             <div className="col-4">

@@ -5,13 +5,12 @@ const Footer = () => {
     <div>
       <footer className="bg-light text-center text-lg-start">
         <div className="text-center p-3">
-          © 2021Copyright:
+          Git Hub:
           <a
-            className="text-dark"
+            className="text-dark" rel='noreferrer'
             href="https://github.com/johnicassere"
             target="_blank"
           >
-            {" "}
             Johni-Cassere
           </a>
         </div>

@@ -80,7 +80,7 @@ const View = () => {
           <button className="btn btn-danger mr-2" onClick={FechaModal}>
             Não!
           </button>
-          <button className="btn btn-succes" onClick={handleDelete}>
+          <button className="btn btn-success" onClick={handleDelete}>
             Sim!
           </button>
         </div>

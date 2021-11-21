@@ -96,9 +96,9 @@ const Edit = () => {
                     id="prioridade"
                     className="form-control"
                   >
-                    <option value="Min">Min</option>
-                    <option value="Medio">Medio</option>
-                    <option value="Max">Max</option>
+                    <option value="Min">Baixa</option>
+                    <option value="Medio">Média</option>
+                    <option value="Max">Alta</option>
                   </select>
                 </div>
               </div>
@@ -107,15 +107,17 @@ const Edit = () => {
               <div className="col-4">
                 <div className="form-group">
                   <label htmlFor="statusTarefa">Status da Tarefa:</label>
-                  <input
-                    id="statusTarefa"
-                    type="text"
+                  <select
                     value={tarefa.statusTarefa}
                     onChange={handleFieldsChange}
-                    className="form-control"
-                    placeholder="Status Tarefa"
                     name="statusTarefa"
-                  />
+                    id="statusTarefa"
+                    className="form-control"
+                  >
+                    <option value="Min">Fazer</option>
+                    <option value="Medio">Fazendo</option>
+                    <option value="Max">Feito</option>
+                  </select>
                 </div>
               </div>
               <div className="col-4">
