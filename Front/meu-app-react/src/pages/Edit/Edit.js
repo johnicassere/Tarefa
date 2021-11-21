@@ -1,54 +1,51 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Api from "../../api/api";
 
+const Edit = () => {
+  const navigate = useNavigate();
+  const [tarefa, setTarefa] = useState({
+    titulo: "",
+    descricao: "",
+    prioridade: "",
+    statusTarefa: "",
+    prazo: "",
+  });
 
-const Edit = () =>{
-    const navigate = useNavigate();
-    const [tarefa, setTarefa] = useState({
-      titulo:'',
-      descricao:'',
-      prioridade:'',
-      statusTarefa:'',
-      prazo:''
+  useEffect(() => {
+    getTarefaById();
+  }, []);
 
-    });
+  const { id } = useParams();
 
-    useEffect(() =>{
-        getTarefaById();
-    }, []);
+  const getTarefaById = async () => {
+    const request = await Api.fetchGetById(id);
+    const tarefa = await request.json();
+    setTarefa(tarefa);
+  };
+  const handleFieldsChange = (evento) => {
+    const tarefaEdit = { ...tarefa };
+    tarefaEdit[evento.target.name] = evento.target.value;
+    console.log(tarefaEdit);
+    setTarefa(tarefaEdit);
+  };
 
-    const { id } = useParams();
+  const handleSubmit = async (evento) => {
+    evento.preventDefault();
+    const request = await Api.fetchPut(tarefa, id);
+    const data = await request.json();
+    alert(data.message);
+    //navigate('/');
+    navigate(`/view/${id}`);
+  };
 
-    const getTarefaById = async() =>{
-        const request = await Api.fetchGetById(id);
-        const tarefa = await request.json();
-        setTarefa(tarefa);
-    };
-    const handleFieldsChange = (evento) =>{
-        const tarefaEdit = { ...tarefa }
-        tarefaEdit[evento.target.name] = evento.target.value; 
-        console.log(tarefaEdit);
-        setTarefa(tarefaEdit);
+  const voltar = async (evento) => {
+    evento.preventDefault();
+    navigate(`/view/${id}`);
+  };
 
-    }
-
-    const handleSubmit = async (evento) =>{
-      evento.preventDefault();
-      const request = await Api.fetchPut(tarefa, id)
-      const data = await request.json();
-      alert(data.message);
-      //navigate('/');
-     navigate(`/view/${id}`);
-    }
-
-    const voltar = async (evento)=>{
-      evento.preventDefault();
-      navigate(`/view/${id}`);
-    }
-    
-    return(
-        <div className="container">
+  return (
+    <div className="container">
       <div className="card mt-4">
         <div className="card-title">
           <div className="row">
@@ -88,21 +85,21 @@ const Edit = () =>{
                   />
                 </div>
               </div>
-              
+
               <div className="col-4">
-              <div className="form-group">
-                <label htmlFor="prioridade">Prioridade:</label>
-                <select value={tarefa.prioridade}
-                  onChange={handleFieldsChange}
-                  name="prioridade"
-                  id="prioridade"
-                  className="form-control"
-                >
-                  
-                  <option value="Min">Min</option>
-                  <option value="Medio">Medio</option>
-                  <option value="Max">Max</option>
-                </select>
+                <div className="form-group">
+                  <label htmlFor="prioridade">Prioridade:</label>
+                  <select
+                    value={tarefa.prioridade}
+                    onChange={handleFieldsChange}
+                    name="prioridade"
+                    id="prioridade"
+                    className="form-control"
+                  >
+                    <option value="Min">Min</option>
+                    <option value="Medio">Medio</option>
+                    <option value="Max">Max</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -140,9 +137,9 @@ const Edit = () =>{
                   Editar
                 </button>
                 <form onClick={voltar}>
-                <button type="button" className="btn btn-danger">
-                  Voltar
-                </button>
+                  <button type="button" className="btn btn-danger">
+                    Voltar
+                  </button>
                 </form>
               </div>
             </div>
@@ -150,7 +147,7 @@ const Edit = () =>{
         </div>
       </div>
     </div>
-    );
+  );
 };
 
-export default Edit
+export default Edit;

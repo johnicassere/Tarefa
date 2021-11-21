@@ -1,20 +1,19 @@
-const express = require('express');
+const express = require("express");
 
-const TarefasController = require('./../controllers/tarefas.controller');
+const TarefasController = require("./../controllers/tarefas.controller");
 
-const tarefasController = new TarefasController;
+const tarefasController = new TarefasController();
 
 const router = express.Router();
 
-router.get('/', tarefasController.getTarefas);
+router.get("/", tarefasController.getTarefas);
 
-router.get('/:id', tarefasController.getTarefasById);
+router.get("/:id", tarefasController.getTarefasById);
 
-router.post('/add', tarefasController.createTarefa);
+router.post("/add", tarefasController.createTarefa);
 
-router.put('/:id', tarefasController.editTarefa);
+router.put("/:id", tarefasController.editTarefa);
 
-router.delete('/:id', tarefasController.deleteTarefa);
+router.delete("/:id", tarefasController.deleteTarefa);
 
 module.exports = router;
-
