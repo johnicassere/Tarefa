@@ -62,6 +62,9 @@ const View = () => {
             <h4 className="text-center">
               Descrição: <span>{tarefa.descricao}</span>
             </h4>
+            <h4 className="text-center">
+              Data de Criação: <span>{tarefa.dataCriacao}</span>
+            </h4>
 
             <div className="btn-group-view d-flex justify-content-center">
               <Link to={`/edit/${tarefa._id}`} className="btn btn-info">
