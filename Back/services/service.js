@@ -7,15 +7,11 @@ class tarefasService{
         return await TarefasModel.findById(id)
     };
 
-    create = async (tarefa) => {
-        return await TarefasModel.findById(id)
-    };
-
     create = async (tarefa) =>{
         return await TarefasModel.create(tarefa)
     }
-    edit = async(id,tarega) =>{
-        return await TarefasModel.updateOne({_id: id, tarefa})
+    edit = async(id,tarefa) =>{
+        return await TarefasModel.updateOne({_id: id}, tarefa)
     }
 
     delete = async (id) =>{

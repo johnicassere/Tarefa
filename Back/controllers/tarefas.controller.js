@@ -18,7 +18,7 @@ class TarefasController{
     
     await tarefasService.create(req.body)
     .then(() =>{
-        res.send({message: `Tarefa ${tarefa.nome} Cadastro com sucesso`})
+        res.send({message: `Tarefa ${tarefa.titulo} Cadastrado com sucesso`})
     })
     .catch((err) =>{
         console.log(err);
@@ -30,7 +30,7 @@ class TarefasController{
 editTarefa = async (req,res) =>{
     const idParam = req.params.id;
     const tarefaEdit = req.body;
-    await tarefasService.edit(idParam,tarefaEdit)
+    await tarefasService.edit(idParam, tarefaEdit)
     .then(() =>{
         res.send({message: `Tarefa editada com sucesso`})
     })

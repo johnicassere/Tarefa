@@ -8,11 +8,11 @@ const router = express.Router();
 
 router.get('/', tarefasController.getTarefas);
 
-router.get('/:id',tarefasController.getTarefasById);
+router.get('/:id', tarefasController.getTarefasById);
 
 router.post('/add', tarefasController.createTarefa);
 
-router.put('/:id',tarefasController.editTarefa);
+router.put('/:id', tarefasController.editTarefa);
 
 router.delete('/:id', tarefasController.deleteTarefa);
 
